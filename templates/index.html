@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Voice App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Voice App</h1>
+            <p class="subtitle">Text-to-speech powered by Kokoro-82M</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <div class="form-group">
+                    <label for="text-input">Text</label>
+                    <textarea id="text-input" placeholder="Enter text to speak…" rows="4"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="voice-select">Voice</label>
+                        <select id="voice-select"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="speed-select">Speed</label>
+                        <select id="speed-select">
+                            <option value="0.5">0.5x</option>
+                            <option value="0.75">0.75x</option>
+                            <option value="1.0" selected>1x</option>
+                            <option value="1.25">1.25x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2.0">2x</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="speak-btn" onclick="speak()">Generate & Play</button>
+                <div id="status" class="status"></div>
+            </div>
+
+            <div class="card" id="player-card" style="display:none">
+                <audio id="player" controls autoplay></audio>
+                <button class="btn-secondary" onclick="downloadAudio()">Download WAV</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>Model: <a href="https://huggingface.co/hexgrad/Kokoro-82M" target="_blank">Kokoro-82M</a> &mdash; <span id="voice-count"></span></p>
+        </footer>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
