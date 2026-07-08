@@ -1,0 +1,19 @@
+# Place in /etc/systemd/system/voice-app.service
+# Then: sudo systemctl daemon-reload && sudo systemctl enable --now voice-app
+
+[Unit]
+Description=Voice App — Kokoro-82M TTS
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=akramh
+WorkingDirectory=/home/akramh/voice-app
+Environment=PATH=/home/akramh/voice-app/venv/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/akramh/voice-app/venv/bin/gunicorn -w 2 -b 127.0.0.1:8445 --access-logfile - app:app
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
